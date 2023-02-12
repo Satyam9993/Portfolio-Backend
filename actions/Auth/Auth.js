@@ -88,14 +88,18 @@ exports.loginUser = async (req, res) => {
     const { email, password } = req.body;
     await User.findOne({ email: email }).then(async (user)=>{
       await bcrypt.compare(password, user.password).then((bc)=>{
-        const payload = {
-          user: {
-            id: user.id,
-          },
-        };
-        
-        const authToken = jwt.sign(payload, JWT_SECRET);
-        res.status(200).send({ success: "true", authToken: authToken, userName : user.userName, userId : user.id });
+        if(bc){
+          const payload = {
+            user: {
+              id: user.id,
+            },
+          };
+          console.log("Satyam ", bc);
+          const authToken = jwt.sign(payload, JWT_SECRET);
+          res.status(200).send({ success: "true", authToken: authToken, userName : user.userName, userId : user.id });
+        }else{
+          res.status(401).send({ success: "false", msg : "Authentification failed"});
+        }
       }).catch(err=>{
         res.status(401).send({ error: err });
       })
