@@ -18,6 +18,10 @@ const port = process.env.PORT || 5000
 app.use(express.json())
 app.use(cors())
 
+if (process.env.NODE_ENV === "production") {
+  app.use(express.static("client/build"));
+}
+
 app.get("/", (req, res)=>{
   res.send({"Success":"true"});
 })
