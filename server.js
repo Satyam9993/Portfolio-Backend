@@ -18,6 +18,10 @@ const port = process.env.PORT || 5000
 app.use(express.json())
 app.use(cors())
 
+app.get("/", (req, res)=>{
+  res.send({"Success":"true"});
+})
+
 // Available Routes
 app.use('/api', index);
 // app.use('/api/notes/', require('./routes/notes.js'));
