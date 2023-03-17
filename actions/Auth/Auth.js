@@ -94,9 +94,8 @@ exports.loginUser = async (req, res) => {
               id: user.id,
             },
           };
-          console.log("Satyam ", bc);
           const authToken = jwt.sign(payload, JWT_SECRET);
-          res.status(200).send({ success: "true", authToken: authToken, userName : user.userName, userId : user.id });
+          res.status(200).send({ success: "true", authToken: authToken, userName : user.Name, userId : user.id });
         }else{
           res.status(401).send({ success: "false", msg : "Authentification failed"});
         }

@@ -4,7 +4,7 @@ const fetchuser  = require('../../middleware/fetchUser')
 const {getUserDatabyUserName, getUserData} = require("../../actions/UserDetail/UserDetails")
 
 
-router.get('/:username', getUserDatabyUserName)
+router.get('/:userId', getUserDatabyUserName)
 router.get('/data/:userId', getUserData)
 
 module.exports = router;

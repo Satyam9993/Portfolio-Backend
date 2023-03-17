@@ -13,13 +13,14 @@ const JWT_SECRET = process.env.JWT_SECRET;
 
 exports.getUserDatabyUserName = async (req, res) => {
   try {
-    const username = req.params.username;
-    if (!username) {
+    // const username = req.params.username;
+    const userId = req.params.userId;
+    if (!userId) {
       return res
         .status(404)
         .json({ success: false, errmsg: "Cannot get User Name" });
     }
-    await User.findOne({userName : username})
+    await User.findById(userId)
     .populate([
         {
             path : "skills",
